@@ -64,8 +64,9 @@ Y = scale(Y,scale = F)
 ```
 
 Now we perform 2ScML with function `OneSample_2ScML`. As 7 IVs are
-relevant, we select \[K_1\] from 5 to 10; 2 IVs are invalid, we select
-\[K_2\] from 0 to 5.
+relevant, we select ![K\_1](https://latex.codecogs.com/png.latex?K_1
+"K_1") from 5 to 10; 2 IVs are invalid, we select
+![K\_2](https://latex.codecogs.com/png.latex?K_2 "K_2") from 0 to 5.
 
 ``` r
 OneSample_2ScML(Y = Y,D = D,Z = Z,
@@ -91,12 +92,21 @@ OneSample_2ScML(Y = Y,D = D,Z = Z,
 #> [1] 0.04184548
 ```
 
-We can see, in the first stage, BIC chooses the correct \[K_1 = 7\], and
-2ScML correctly select the 7 relevant IVs, \[2^{nd}\] to \[8^{th}\]; in
-the second stage, BIC chooses the correct \[K_2 = 2\], and 2ScML
-correctly select the 2 invalid IVs, \[7^{th}\] and \[8^{th}\]. The
-estimated causal effect \[\hat{\beta} = 0.0188\], with standard error
-\[se(\hat{\beta}) = 0.0418\].
+We can see, in the first stage, BIC chooses the correct ![K\_1
+= 7](https://latex.codecogs.com/png.latex?K_1%20%3D%207 "K_1 = 7"), and
+2ScML correctly select the 7 relevant IVs,
+![2^{nd}](https://latex.codecogs.com/png.latex?2%5E%7Bnd%7D "2^{nd}") to
+![8^{th}](https://latex.codecogs.com/png.latex?8%5E%7Bth%7D "8^{th}");
+in the second stage, BIC chooses the correct ![K\_2
+= 2](https://latex.codecogs.com/png.latex?K_2%20%3D%202 "K_2 = 2"), and
+2ScML correctly select the 2 invalid IVs,
+![7^{th}](https://latex.codecogs.com/png.latex?7%5E%7Bth%7D "7^{th}")
+and ![8^{th}](https://latex.codecogs.com/png.latex?8%5E%7Bth%7D
+"8^{th}"). The estimated causal effect ![\\hat{\\beta}
+= 0.0188](https://latex.codecogs.com/png.latex?%5Chat%7B%5Cbeta%7D%20%3D%200.0188
+"\\hat{\\beta} = 0.0188"), with standard error ![se(\\hat{\\beta})
+= 0.0418](https://latex.codecogs.com/png.latex?se%28%5Chat%7B%5Cbeta%7D%29%20%3D%200.0418
+"se(\\hat{\\beta}) = 0.0418").
 
 ## Example of Two-Sample Case
 
@@ -153,8 +163,9 @@ Y2 = scale(Y2,scale = F)
 ```
 
 From the data generation we can see, all 30 IVs are relevant, and the
-\[1^{st}\] to \[9^{th}\] are invalid. Now we perform first stage with
-linear regression.
+![1^{st}](https://latex.codecogs.com/png.latex?1%5E%7Bst%7D "1^{st}") to
+![9^{th}](https://latex.codecogs.com/png.latex?9%5E%7Bth%7D "9^{th}")
+are invalid. Now we perform first stage with linear regression.
 
 ``` r
 FirstStage = lm(X1~0+Z1)
@@ -192,7 +203,13 @@ TwoSample_2ScML(Y = Y2,Z = Z2,
 #> [1] 0.01577231
 ```
 
-We can see, in the second stage, BIC select correct \[K_2 = 9\], and
-2ScML correctly select the 9 invalid IVs, \[1^{st}\] to \[9^{th}\]. The
-estimated causal effect is \[\hat{\beta} = -0.0992\], with standard
-error \[se(\hat{\beta}) = 0.0158\].
+We can see, in the second stage, BIC select correct ![K\_2
+= 9](https://latex.codecogs.com/png.latex?K_2%20%3D%209 "K_2 = 9"), and
+2ScML correctly select the 9 invalid IVs,
+![1^{st}](https://latex.codecogs.com/png.latex?1%5E%7Bst%7D "1^{st}") to
+![9^{th}](https://latex.codecogs.com/png.latex?9%5E%7Bth%7D "9^{th}").
+The estimated causal effect is ![\\hat{\\beta} =
+-0.0992](https://latex.codecogs.com/png.latex?%5Chat%7B%5Cbeta%7D%20%3D%20-0.0992
+"\\hat{\\beta} = -0.0992"), with standard error ![se(\\hat{\\beta})
+= 0.0158](https://latex.codecogs.com/png.latex?se%28%5Chat%7B%5Cbeta%7D%29%20%3D%200.0158
+"se(\\hat{\\beta}) = 0.0158").
