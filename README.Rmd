@@ -56,7 +56,7 @@ Sigma_error = matrix(c(1.5,0.75,0.75,1.5),nrow = 2)
 
 # Effect Sizes
 Gamma_ZD = c(0,rep(1,7),rep(0,pz-8))*0.5 # IV 2 to 8 are relevant
-Pi_ZY = c(0,rep(0,5),rep(1,2),rep(0,pz-8))*0.5 # IV 7, 8 are invalid
+Pi_ZY = c(rep(0,6),rep(1,2),rep(0,pz-8))*0.5 # IV 7, 8 are invalid
 
 set.seed(1)
 # generate IV
@@ -75,7 +75,7 @@ Y = scale(Y,scale = F)
 
 ```
 
-Now we perform 2ScML with function `OneSample_2ScML`. As 7 IVs are relevant, we select $K_1$ from 5 to 10; 2 IVs are invalid, we select $K_2$ from 0 to 5.
+Now we perform 2ScML with function `OneSample_2ScML()`. As 7 IVs are relevant, we select $K_1$ from 5 to 10; 2 IVs are invalid, we select $K_2$ from 0 to 5.
 
 ```{r}
 OneSample_2ScML(Y = Y,D = D,Z = Z,
