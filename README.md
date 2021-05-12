@@ -64,8 +64,8 @@ Y = scale(Y,scale = F)
 ```
 
 Now we perform 2ScML with function `OneSample_2ScML`. As 7 IVs are
-relevant, we select \(K_1\) from 5 to 10; 2 IVs are invalid, we select
-\(K_2\) from 0 to 5.
+relevant, we select \[K_1\] from 5 to 10; 2 IVs are invalid, we select
+\[K_2\] from 0 to 5.
 
 ``` r
 OneSample_2ScML(Y = Y,D = D,Z = Z,
@@ -91,12 +91,12 @@ OneSample_2ScML(Y = Y,D = D,Z = Z,
 #> [1] 0.04184548
 ```
 
-We can see, in the first stage, BIC chooses the correct \(K_1 = 7\), and
-2ScML correctly select the 7 relevant IVs, \(2^{nd}\) to \(8^{th}\); in
-the second stage, BIC chooses the correct \(K_2 = 2\), and 2ScML
-correctly select the 2 invalid IVs, \(7^{th}\) and \(8^{th}\). The
-estimated causal effect \(\hat{\beta} = 0.0188\), with standard error
-\(se(\hat{\beta}) = 0.0418\).
+We can see, in the first stage, BIC chooses the correct \[K_1 = 7\], and
+2ScML correctly select the 7 relevant IVs, \[2^{nd}\] to \[8^{th}\]; in
+the second stage, BIC chooses the correct \[K_2 = 2\], and 2ScML
+correctly select the 2 invalid IVs, \[7^{th}\] and \[8^{th}\]. The
+estimated causal effect \[\hat{\beta} = 0.0188\], with standard error
+\[se(\hat{\beta}) = 0.0418\].
 
 ## Example of Two-Sample Case
 
@@ -153,7 +153,7 @@ Y2 = scale(Y2,scale = F)
 ```
 
 From the data generation we can see, all 30 IVs are relevant, and the
-\(1^{st}\) to \(9^{th}\) are invalid. Now we perform first stage with
+\[1^{st}\] to \[9^{th}\] are invalid. Now we perform first stage with
 linear regression.
 
 ``` r
@@ -192,7 +192,7 @@ TwoSample_2ScML(Y = Y2,Z = Z2,
 #> [1] 0.01577231
 ```
 
-We can see, in the second stage, BIC select correct \(K_2 = 9\), and
-2ScML correctly select the 9 invalid IVs, \(1^{st}\) to \(9^{th}\). The
-estimated causal effect is \(\hat{\beta} = -0.0992\), with standard
-error \(se(\hat{\beta}) = 0.0158\).
+We can see, in the second stage, BIC select correct \[K_2 = 9\], and
+2ScML correctly select the 9 invalid IVs, \[1^{st}\] to \[9^{th}\]. The
+estimated causal effect is \[\hat{\beta} = -0.0992\], with standard
+error \[se(\hat{\beta}) = 0.0158\].
