@@ -6,9 +6,9 @@
 #' @param X Design matrix with n rows and p columns.
 #' @param K Constraint parameter in TLC.
 #' @param tau Parameter tau in TLC.
-#' @param tlc_weight Length p vector of weights corresponding to p variables, 
-#' each element is either 1 (with constraint) or 0 (without constraint). 
-#' Default are all 1's. 
+#' @param tlc_weight Length p vector of weights corresponding to p variables,
+#' each element is either 1 (with constraint) or 0 (without constraint).
+#' Default are all 1's.
 #' @param maxit_tlc Maximum number of DC iteration.
 #' @param tol_tlc Convergence tolerance for TLC.
 #'
@@ -23,14 +23,14 @@ TLC <- function(Y,X,K,
 {
   n = length(Y)
   p = ncol(X)
-  
+
   Y = scale(Y,scale = F)
   X = scale(X,scale = F)
-  
+
   beta = rep(0,p)
   loss_old = sum((Y - X%*%beta)^2)
   loss_new = loss_old
-  
+
   ite_ind = 1
   while(ite_ind <= maxit_tlc)
   {
@@ -40,7 +40,12 @@ TLC <- function(Y,X,K,
     if(t<=0)
     {
       zero_ind = which(weight_lasso==0)
-      lm1 = lm(Y ~ 0 + X[,zero_ind])
+      if(length(zero_ind) == 0)
+      {
+        lm1 = lm(Y ~ 0)
+      } else {
+        lm1 = lm(Y ~ 0 + X[,zero_ind])
+      }
       beta1 = lm1$coefficients
       names(beta1) = NULL
       beta = rep(0,p)
@@ -51,13 +56,13 @@ TLC <- function(Y,X,K,
       zero_ind = which(weight_lasso==0)
       data1 = as.data.frame(cbind(Y,X))
       fit_formula = as.formula(paste(colnames(data1)[1], "~."))
-      
+
       if(length(zero_ind > 0))
       {
         sweep_formula = as.formula(paste("~1+",
                                          paste(colnames(data1)[zero_ind+1],
                                                collapse = "+"),sep=""))
-        
+
       } else {
         sweep_formula = as.formula(paste("~1"))
       }
@@ -75,12 +80,17 @@ TLC <- function(Y,X,K,
     }
   }
   nonzero_ind = which(beta!=0)
-  lm1 = lm(Y ~ 0 + X[,nonzero_ind])
+  if(length(nonzero_ind) == 0)
+  {
+    lm1 = lm(Y ~ 0)
+  } else{
+    lm1 = lm(Y ~ 0 + X[,nonzero_ind])
+  }
   beta1 = lm1$coefficients
   names(beta1) = NULL
   beta = rep(0,p)
   beta[nonzero_ind] = beta1
-  
+
   return(beta)
-  
+
 }
