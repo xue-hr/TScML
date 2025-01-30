@@ -30,7 +30,15 @@ We need three R packages:
   `devtools::install_github` to install package from GitHub.
 - **lasso2**: This package is not available on CRAN for R 4.2.2, it is
   availale on GitHub at `https://github.com/cran/lasso2`. We use
-  `lasso2::l1ce` to solve constrained lasso problem.
+  `lasso2::l1ce` to solve constrained lasso problem. Note that, for
+  recent **R** versions (for example R 4.4.2), the `Sint` data type has
+  been removed, which was used in `lasso2` package. Therefore, the
+  `lasso2` package cannot be directly installed from GitHub for recent
+  versions of R. To solve this issue, you can download the source file
+  at
+  `https://cran.r-project.org/src/contrib/Archive/lasso2/lasso2_1.2-22.tar.gz`,
+  then replace `Sint` with `int` in the two files `src/lasso.h` and
+  `src/lasso.c`, and install the package from the source file.
 
 ``` r
 if(!require("MASS"))
@@ -237,7 +245,7 @@ adequately efficient:
 ``` r
 run.time = end.time - start.time
 run.time
-#> Time difference of 0.2383361 secs
+#> Time difference of 0.231663 secs
 ```
 
 Now we can show the results from **Oracle** and **2ScML**.
@@ -273,36 +281,38 @@ latest R release 4.2.2.
 
 ``` r
 sessionInfo()
-#> R version 4.2.2 (2022-10-31)
-#> Platform: aarch64-apple-darwin20 (64-bit)
-#> Running under: macOS Monterey 12.5
+#> R version 4.4.2 (2024-10-31)
+#> Platform: aarch64-apple-darwin20
+#> Running under: macOS Sequoia 15.2
 #> 
 #> Matrix products: default
-#> BLAS:   /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRblas.0.dylib
-#> LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
+#> BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+#> LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 #> 
 #> locale:
 #> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+#> 
+#> time zone: Asia/Shanghai
+#> tzcode source: internal
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] TScML_0.0.0.9000 lasso2_1.2-22    devtools_2.4.5   usethis_2.1.6   
-#> [5] MASS_7.3-58.2   
+#> [1] TScML_0.0.0.9000 lasso2_1.2-22    devtools_2.4.5   usethis_3.1.0   
+#> [5] MASS_7.3-61     
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] Rcpp_1.0.9        urlchecker_1.0.1  compiler_4.2.2    later_1.3.0      
-#>  [5] remotes_2.4.2     prettyunits_1.1.1 profvis_0.3.7     tools_4.2.2      
-#>  [9] digest_0.6.30     pkgbuild_1.4.0    pkgload_1.3.2     evaluate_0.18    
-#> [13] memoise_2.0.1     lifecycle_1.0.3   rlang_1.0.6       shiny_1.7.4      
-#> [17] cli_3.4.1         rstudioapi_0.14   yaml_2.3.6        xfun_0.35        
-#> [21] fastmap_1.1.0     stringr_1.4.1     knitr_1.41        htmlwidgets_1.5.4
-#> [25] fs_1.5.2          glue_1.6.2        R6_2.5.1          processx_3.8.0   
-#> [29] rmarkdown_2.18    sessioninfo_1.2.2 purrr_0.3.5       callr_3.7.3      
-#> [33] magrittr_2.0.3    promises_1.2.0.1  ps_1.7.2          ellipsis_0.3.2   
-#> [37] htmltools_0.5.4   mime_0.12         xtable_1.8-4      httpuv_1.6.6     
-#> [41] stringi_1.7.8     miniUI_0.1.1.1    cachem_1.0.6      crayon_1.5.2
+#>  [1] miniUI_0.1.1.1    compiler_4.4.2    promises_1.3.2    Rcpp_1.0.14      
+#>  [5] later_1.4.1       yaml_2.3.10       fastmap_1.2.0     mime_0.12        
+#>  [9] R6_2.5.1          knitr_1.49        htmlwidgets_1.6.4 profvis_0.4.0    
+#> [13] shiny_1.10.0      rlang_1.1.5       cachem_1.1.0      httpuv_1.6.15    
+#> [17] xfun_0.50         fs_1.6.5          pkgload_1.4.0     memoise_2.0.1    
+#> [21] cli_3.6.3         magrittr_2.0.3    digest_0.6.37     rstudioapi_0.17.1
+#> [25] xtable_1.8-4      remotes_2.5.0     lifecycle_1.0.4   vctrs_0.6.5      
+#> [29] evaluate_1.0.3    glue_1.8.0        urlchecker_1.0.1  sessioninfo_1.2.2
+#> [33] pkgbuild_1.4.6    rmarkdown_2.29    purrr_1.0.2       tools_4.4.2      
+#> [37] ellipsis_0.3.2    htmltools_0.5.8.1
 ```
 
 ## Reference

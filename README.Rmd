@@ -40,6 +40,8 @@ We need three R packages:
  * **lasso2**: This package is not available on CRAN for R 4.2.2, it is availale on GitHub at
   `https://github.com/cran/lasso2`.
   We use `lasso2::l1ce` to solve constrained lasso problem.
+  Note that, for recent **R** versions (for example R 4.4.2), the `Sint` data type has been removed, which was used in `lasso2` package. Therefore, the `lasso2` package cannot be directly installed from GitHub for recent versions of R. To solve this issue, 
+  you can download the source file at `https://cran.r-project.org/src/contrib/Archive/lasso2/lasso2_1.2-22.tar.gz`, then replace `Sint` with `int` in the two files `src/lasso.h` and `src/lasso.c`, and install the package from the source file.
 ```{r}
 if(!require("MASS"))
 {
